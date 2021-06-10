@@ -48,8 +48,8 @@ function onDataReceived(text) {
   else if(text.startsWith("add")){
     add(text);
   }
-  else if(text === "remove\n" || text.startsWith("remove")){
-  remove(text);
+  else if(text.slice(0,6)==='remove'){
+  remove(text.slice(6));
 }
   else{
     unknownCommand(text);
@@ -108,12 +108,15 @@ function add(text){
 }
 function remove(text){
   text = text.trim();
-  if(text.length == 6){
+  if(text ==""){
     tasks.pop();
   }
-  else{
-  tasks.splice(text.substring(8),1);
-}
+  else if(text == "1"){
+    tasks.shift();
+  }
+  else if(text == "2"){
+    tasks.splice(1,1);
+  }
 }
 
 
