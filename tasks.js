@@ -57,6 +57,12 @@ function onDataReceived(text) {
   else if(text === 'edit\n' || text.startsWith('edit')){
     edit(text);
   }
+  else if(text === 'check\n' || text.startsWith('check ')){
+    check(text);
+  }
+  else if(text === 'uncheck\n' || text.startsWith('uncheck ')){
+    unCheck(text);
+  }
   else{
     unknownCommand(text);
   }
@@ -103,7 +109,7 @@ function list(tasks){
   }
   for(let i=0; i <tasks.length; i++){
     if(tasks[i].done == false){tasks[i].done = '[ ]'}
-    console.log(tasks[i].done, tasks[i].name)
+    console.log(i+1 + "-"+ tasks[i].done, tasks[i].name)
   }
   console.log("Type check/uncheck number_of_task to mark as complete/incomplete")
 }
@@ -159,6 +165,45 @@ function edit(text){
     }
   }
 }
+
+function check(text){
+  if(text === 'check\n'){
+    console.log("Error. Please specify task number to mark as checked!")
+  }
+  else{
+    let v = text.split(" ")
+    let y = parseInt(v[1])
+    tempList = tasks
+    let checker = tempList[0].done
+    if(y > tasks.length){
+      console.log("error")
+      return
+    }
+    if(checker = '[ ]'){
+      tasks[y-1].done = '[✓]';
+      console.log("Task " + y + " marked as complete!")
+    }
+    else{console.log("You're already done with that one!")}
+  }
+}
+
+function unCheck(text){
+  if(text === 'uncheck\n'){
+    console.log("Error. Please specify task number to mark as unchecked!")
+  }
+  else{
+    let v = text.split(" ")
+    let y = parseInt(v[1])
+    if(y > tasks.length){
+      console.log("error")
+      return
+    }
+    let checker = tasks[y-1].done
+    if(checker = '[✓]'){tasks[y-1].done = '[ ]', console.log("Task " + y + " marked as Incomplete!")}
+    else{console.log("Nothing to do.")} 
+  }}
+
+
 
  
 
