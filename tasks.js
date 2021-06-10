@@ -45,6 +45,9 @@ function onDataReceived(text) {
   else if(text === "list\n") {
     list();
   }
+  else if(text.startsWith("add")){
+    add(text);
+}
   else{
     unknownCommand(text);
   }
@@ -78,6 +81,15 @@ function help(){
 function list(){
 for(i=0;i<tasks.length;i++){
   console.log(tasks[i]);
+}
+}
+function add(text){
+  if (text != undefined){
+  text = text.trim();
+  tasks.push(text.substring(4).trim());
+}
+else{
+  console.log("Error")
 }
 }
 
