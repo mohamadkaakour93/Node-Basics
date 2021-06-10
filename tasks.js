@@ -117,6 +117,9 @@ function remove(text){
   else if(text == "2"){
     tasks.splice(1,1);
   }
+  else if (text>tasks.length) {
+    console.log(" This task number does not exist!")
+  }
 }
 
 
