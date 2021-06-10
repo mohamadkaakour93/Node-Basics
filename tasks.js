@@ -34,20 +34,40 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  if (text === 'quit\n'||text === 'exit\n'){
+  text= text.replace('\n','').trim();
+  var arrText = text.split(' ');
+  console.log(arrText);
+  if (arrText[0] === 'quit' || arrText[0] === 'exit') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
+  else if(arrText[0] === 'hello'){
+    hello(arrText[1]);
   }
-  else if (text=== 'help\n'){
-    help();
+  else if (arrText[0] === 'list'){
+    list();
+  }
+  else if (arrText[0] === 'add'){
+    add(arrText);
+  }
+  else if (arrText[0] === 'help'){
+      help(); 
+  }
+  else if (arrText[0] === 'remove'){
+    remove(arrText);
+  }
+  else if (arrText[0] === 'edit'){
+    edit(arrText);
+  }
+  else if (arrText[0] === 'check'){
+    check(arrText);
+  }
+  else if (arrText[0] === 'uncheck'){
+    unCheck(arrText);
   }
   else{
     unknownCommand(text);
   }
 }
-
 
 /**
  * prints "unknown command"
@@ -66,9 +86,10 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(text){
+console.log("hello" + " "+text+ "!")
 }
+
 
 
 /**
@@ -80,6 +101,7 @@ function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
 }
+/*help command that lists all possible commands*/
 function help(){
   console.log('here are the possible commands: \n','\n','quit\n','hello\n','help\n','list\n','remove\n','add\n','edit\n','check\n','uncheck\n')
 }
