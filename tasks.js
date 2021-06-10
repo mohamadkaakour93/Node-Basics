@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-let tasks = [{"task":"task1"}]
+let tasks = [['buy batata'],['hello world'],['buy chocolate']]
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -47,6 +47,9 @@ function onDataReceived(text) {
   }
   else if(text.startsWith("add")){
     add(text);
+  }
+  else if(text === "remove\n" || text.startsWith("remove")){
+  remove(text);
 }
   else{
     unknownCommand(text);
@@ -76,22 +79,43 @@ function hello(text){
 }
 /*help command that lists all possible commands*/
 function help(){
-  console.log('here are the possible commands: \n','\n','quit\n','hello\n','help\n','list\n','remove\n','add\n','edit\n','check\n','uncheck\n')
+  console.log("\n");
+  console.log("--- All Commands ---\n");
+  console.log("hello - prints hello and greets you\n");
+  console.log("list - lists all the possible commands that you can use\n");
+  console.log("add - adds new task\n");
+  console.log("remove - removes a certain task\n");
+  console.log("edit - edits the tasks");
+  console.log("check - marks the task as done\n");
+  console.log("uncheck - demarks the task so it becomes undone");
+  console.log("exit or quit - quits the application\n");
 }
 function list(){
 for(i=0;i<tasks.length;i++){
-  console.log(tasks[i]);
+  console.log(i+1 +"-"+tasks[i]+"\n");
 }
 }
 function add(text){
-  if (text != undefined){
+  text = text.slice(3);
   text = text.trim();
-  tasks.push(text.substring(4).trim());
-}
-else{
+  if(text != ""){
+    tasks.push(text);
+  }
+  else{
   console.log("Error")
+  }
+
+}
+function remove(text){
+  text = text.trim();
+  if(text.length == 6){
+    tasks.pop();
+  }
+  else{
+  tasks.splice(text.substring(8),1);
 }
 }
+
 
 
 
