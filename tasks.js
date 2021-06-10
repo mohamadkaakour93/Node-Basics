@@ -50,7 +50,10 @@ function onDataReceived(text) {
   }
   else if(text.slice(0,6)==='remove'){
   remove(text.slice(6));
-}
+  }
+  else if(text === 'edit\n' || text.startsWith('edit')){
+    edit(text);
+  }
   else{
     unknownCommand(text);
   }
@@ -121,6 +124,33 @@ function remove(text){
     console.log(" This task number does not exist!")
   }
 }
+function edit(text){
+  let test = text.split(" ");
+  test.shift();
+  let a = test[0];
+  if (text === "edit\n"){
+    console.log("Error");
+  }
+  else{
+    let final = test.join(" ").replace("\n","")
+    if(isNaN(a)){
+      let b = text.replace('edit ', "")
+      tasks.pop()
+      tasks.push(b)
+      list();
+    }
+    else{
+      let b = parseInt(a)
+      let temp = final.split(" ")
+      temp2 = temp.shift();
+      temp = temp.join(" ")
+      let final2 = temp
+      tasks[b-1] = final2;
+      list();
+    }
+  }
+}
+ 
 
 
 
