@@ -9,6 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
+let tasks = [{"task":"task1"},{"task":"task2"},{"task":"task3"}]
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -45,6 +46,9 @@ function onDataReceived(text) {
   }
   else if(arrText[0]=== 'help'){
     help(arrText[1]);
+  }
+  else if(arrText[0]==='list'){
+    list(arrText[1]);
   }
   
   else{
@@ -91,6 +95,11 @@ function quit(){
 /*help command that lists all possible commands*/
 function help(){
   console.log('here are the possible commands: \n','\n','quit\n','hello\n','help\n','list\n','remove\n','add\n','edit\n','check\n','uncheck\n')
+}
+function list(){
+for(i=0;i<tasks.length;i++){
+console.log(tasks[i]);
+}
 }
 
 // The following line starts the application
