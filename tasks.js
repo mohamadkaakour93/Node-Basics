@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-let tasks = [['buy batata'],['hello world'],['buy chocolate']]
+let tasks = []
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -42,8 +42,11 @@ function onDataReceived(text) {
   } else if (text === "help\n") {
     help();
   }
-  else if(text === "list\n") {
-    list();
+  else if(text === 'list\n'){
+    list(tasks);
+  }
+  else if(text === 'add\n'){
+    console.log('Cannot add empty fields');
   }
   else if(text.startsWith("add")){
     add(text);
@@ -93,21 +96,21 @@ function help(){
   console.log("uncheck - demarks the task so it becomes undone");
   console.log("exit or quit - quits the application\n");
 }
-function list(){
-for(i=0;i<tasks.length;i++){
-  console.log(i+1 +"-"+tasks[i]+"\n");
-}
+function list(tasks){
+  if(tasks.length == 0){
+    console.log("No tasks to show")
+    return
+  }
+  for(let i=0; i <tasks.length; i++){
+    if(tasks[i].done == false){tasks[i].done = '[ ]'}
+    console.log(tasks[i].done, tasks[i].name)
+  }
+  console.log("Type check/uncheck number_of_task to mark as complete/incomplete")
 }
 function add(text){
-  text = text.slice(3);
-  text = text.trim();
-  if(text != ""){
-    tasks.push(text);
-  }
-  else{
-  console.log("Error")
-  }
-
+  let b = {"done": false, "name": text.replace('add ', "").trim()}
+  tasks.push(b);
+  console.log("New task added. Type \'list\' to see your tasks.")
 }
 function remove(text){
   text = text.trim();
