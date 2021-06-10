@@ -114,45 +114,52 @@ function add(text){
 }
 function remove(text){
   text = text.trim();
-  if(text ==""){
-    tasks.pop();
-  }
-  else if(text == "1"){
-    tasks.shift();
-  }
-  else if(text == "2"){
-    tasks.splice(1,1);
-  }
-  else if (text>tasks.length) {
-    console.log(" This task number does not exist!")
-  }
+  if(text.length == 6){tasks.pop()}
+  else{
+    let num = text.split(' ');
+    var c = parseInt(num[1]-1);
+    if(c < 0 || c >= tasks.length){
+      console.log('entry doesn\'t exist')
+    }
+    else{
+    x = tasks.splice(c, 1);
+    for(let i=0; i <tasks.length; i++){
+      if(tasks[i].done == true){
+        tasks[i].done = '[✓]'
+      }
+      else{
+        tasks[i].done = '[ ]'
+      }
+      console.log(tasks[i].done, tasks[i].name)
+    }
+    }
+ }  
 }
 function edit(text){
   let test = text.split(" ");
   test.shift();
   let a = test[0];
   if (text === "edit\n"){
-    console.log("Error");
+    console.log("Error, type \'help\' for additional commands");
   }
   else{
     let final = test.join(" ").replace("\n","")
     if(isNaN(a)){
-      let b = text.replace('edit ', "")
+      let b = {"done": false, "name": text.replace('edit ', "")}
       tasks.pop()
       tasks.push(b)
-      list();
     }
     else{
       let b = parseInt(a)
       let temp = final.split(" ")
       temp2 = temp.shift();
       temp = temp.join(" ")
-      let final2 = temp
+      let final2 = {"done": false, "name": temp};
       tasks[b-1] = final2;
-      list();
     }
   }
 }
+
  
 
 
