@@ -43,27 +43,10 @@ function onDataReceived(text) {
   else if(arrText[0] === 'hello'){
     hello(arrText[1]);
   }
-  else if (arrText[0] === 'list'){
-    list();
+  else if(arrText[0]=== 'help'){
+    help(arrText[1]);
   }
-  else if (arrText[0] === 'add'){
-    add(arrText);
-  }
-  else if (arrText[0] === 'help'){
-      help(); 
-  }
-  else if (arrText[0] === 'remove'){
-    remove(arrText);
-  }
-  else if (arrText[0] === 'edit'){
-    edit(arrText);
-  }
-  else if (arrText[0] === 'check'){
-    check(arrText);
-  }
-  else if (arrText[0] === 'uncheck'){
-    unCheck(arrText);
-  }
+  
   else{
     unknownCommand(text);
   }
@@ -87,6 +70,7 @@ function unknownCommand(c){
  * @returns {void}
  */
 function hello(text){
+  
 console.log("hello" + " "+text+ "!")
 }
 
