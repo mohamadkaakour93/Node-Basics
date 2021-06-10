@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-let tasks = [{"task":"task1"},{"task":"task2"},{"task":"task3"}]
+let tasks = [{"task":"task1"}]
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -35,22 +35,16 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
-  text= text.replace('\n','').trim();
-  var arrText = text.split(' ');
-  console.log(arrText);
-  if (arrText[0] === 'quit' || arrText[0] === 'exit') {
+  if (text === "quit\n" || text === "exit\n") {
     quit();
+  } else if (text.slice(0,5) === "hello") {
+    hello(text);
+  } else if (text === "help\n") {
+    help();
   }
-  else if(arrText[0] === 'hello'){
-    hello(arrText[1]);
+  else if(text === "list\n") {
+    list();
   }
-  else if(arrText[0]=== 'help'){
-    help(arrText[1]);
-  }
-  else if(arrText[0]==='list'){
-    list(arrText[1]);
-  }
-  
   else{
     unknownCommand(text);
   }
@@ -74,12 +68,22 @@ function unknownCommand(c){
  * @returns {void}
  */
 function hello(text){
-  if(!text){
-    console.log("hello!")
-  }else{
-console.log("hello" + " "+text+ "!")
+  const newValue = text.replace(/ +/g," ").trim();
+  console.log( newValue.trim().split() +"!");
+}
+/*help command that lists all possible commands*/
+function help(){
+  console.log('here are the possible commands: \n','\n','quit\n','hello\n','help\n','list\n','remove\n','add\n','edit\n','check\n','uncheck\n')
+}
+function list(){
+for(i=0;i<tasks.length;i++){
+  console.log(tasks[i]);
 }
 }
+
+
+
+
 
 
 
@@ -91,15 +95,6 @@ console.log("hello" + " "+text+ "!")
 function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
-}
-/*help command that lists all possible commands*/
-function help(){
-  console.log('here are the possible commands: \n','\n','quit\n','hello\n','help\n','list\n','remove\n','add\n','edit\n','check\n','uncheck\n')
-}
-function list(){
-for(i=0;i<tasks.length;i++){
-console.log(tasks[i]);
-}
 }
 
 // The following line starts the application
