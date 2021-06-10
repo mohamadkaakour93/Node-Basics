@@ -18,22 +18,16 @@ function startApp(name){
   console.log("--------------------")
 }
 
-
 /**
- * Decides what to do depending on the data that was received
- * This function receives the input sent by the user.
- * 
- * For example, if the user entered 
- * ```
- * node tasks.js batata
- * ```
- * 
- * The text received would be "batata"
- * This function  then directs to other functions
- * 
- * @param  {string} text data typed by the user
+ * prints "unknown command"
+ * This function is supposed to run when all other commands have failed
+ *
+ * @param  {string} c the text received
  * @returns {void}
  */
+
+
+
 function onDataReceived(text) {
   if (text === "quit\n" || text === "exit\n") {
     quit();
@@ -63,10 +57,35 @@ function onDataReceived(text) {
   else if(text === 'uncheck\n' || text.startsWith('uncheck ')){
     unCheck(text);
   }
+  else if(text === 'clear\n'){
+    clear();
+  }
   else{
     unknownCommand(text);
   }
 }
+const { clear } = require('console');
+// json.parse/readfile/try-catch for empty files error
+/*Define global variable*/
+const fs = require('fs');
+let newList;
+let file;
+if(process.argv[2]){
+  file = process.argv[2]
+}
+else{
+  file = 'database.json'
+}
+try {
+    newList = fs.readFileSync(file, 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+  });
+} catch (error) {
+  newList = [];
+}
+if(newList.length > 0){newList = JSON.parse(newList)}
 
 /**
  * prints "unknown command"
