@@ -9,7 +9,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
-let tasks = []
+/*let tasks = []*/
 function startApp(name){
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
@@ -68,7 +68,7 @@ const { clear } = require('console');
 // json.parse/readfile/try-catch for empty files error
 /*Define global variable*/
 const fs = require('fs');
-let newList;
+let tasks;
 let file;
 if(process.argv[2]){
   file = process.argv[2]
@@ -77,15 +77,15 @@ else{
   file = 'database.json'
 }
 try {
-    newList = fs.readFileSync(file, 'utf8', function (err,data) {
+    tasks = fs.readFileSync(file, 'utf8', function (err,data) {
     if (err) {
       return console.log(err);
     }
   });
 } catch (error) {
-  newList = [];
+  tasks= [];
 }
-if(newList.length > 0){newList = JSON.parse(newList)}
+if(tasks.length > 0){tasks = JSON.parse(tasks)}
 
 /**
  * prints "unknown command"
@@ -239,8 +239,11 @@ function unCheck(text){
  * @returns {void}
  */
 function quit(){
-  console.log('Quitting now, goodbye!')
-  process.exit();
+  fs.writeFile(file, JSON.stringify(tasks, null, 1) ,'utf8', function (err) {
+    if (err) throw err;
+    console.log('\x1b[36m Saving and Quitting now, goodbye!', "\x1b[0m")
+    process.exit();
+  });
 }
 
 // The following line starts the application

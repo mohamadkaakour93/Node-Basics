@@ -1,0 +1,14 @@
+[
+ {
+  "done": "[ ]",
+  "name": "buy batata"
+ },
+ {
+  "done": "[ ]",
+  "name": "buy chocolate"
+ },
+ {
+  "done": "[✓]",
+  "name": "buy pepsi"
+ }
+]
