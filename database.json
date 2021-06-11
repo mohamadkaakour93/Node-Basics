@@ -1,14 +1,6 @@
 [
  {
-  "done": "[ ]",
-  "name": "buy pepsi"
- },
- {
-  "done": "[ ]",
-  "name": "buy batata"
- },
- {
-  "done": "[ ]",
+  "done": "[✓]",
   "name": "buy pepsi"
  },
  {
