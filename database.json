@@ -1,14 +1,22 @@
 [
  {
   "done": "[ ]",
+  "name": "buy pepsi"
+ },
+ {
+  "done": "[ ]",
   "name": "buy batata"
+ },
+ {
+  "done": "[ ]",
+  "name": "buy pepsi"
  },
  {
   "done": "[ ]",
   "name": "buy chocolate"
  },
  {
-  "done": "[✓]",
-  "name": "buy pepsi"
+  "done": "[ ]",
+  "name": "go to codi"
  }
 ]
